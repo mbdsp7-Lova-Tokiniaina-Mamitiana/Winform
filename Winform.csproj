@@ -56,12 +56,27 @@
     <Compile Include="Forms\Accueil.Designer.cs">
       <DependentUpon>Accueil.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ControleDeconnexion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ControleDeconnexion.Designer.cs">
+      <DependentUpon>ControleDeconnexion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CreationMatch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CreationMatch.Designer.cs">
+      <DependentUpon>CreationMatch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Login.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Equipe.cs" />
+    <Compile Include="Model\Match.cs" />
+    <Compile Include="Model\Pari.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,6 +84,12 @@
     <Compile Include="Services\UserService.cs" />
     <EmbeddedResource Include="Forms\Accueil.resx">
       <DependentUpon>Accueil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ControleDeconnexion.resx">
+      <DependentUpon>ControleDeconnexion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CreationMatch.resx">
+      <DependentUpon>CreationMatch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
