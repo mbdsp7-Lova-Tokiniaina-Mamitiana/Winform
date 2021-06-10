@@ -21,3 +21,5 @@ C:\Users\ASUS\source\repos\Winform\Winform\bin\Debug\System.Buffers.dll
 C:\Users\ASUS\source\repos\Winform\Winform\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\ASUS\source\repos\Winform\Winform\obj\Debug\Winform.exe.config
 C:\Users\ASUS\source\repos\Winform\Winform\obj\Debug\Winform.Forms.Accueil.resources
+C:\Users\ASUS\source\repos\Winform\Winform\obj\Debug\Winform.Forms.ControleDeconnexion.resources
+C:\Users\ASUS\source\repos\Winform\Winform\obj\Debug\Winform.Forms.CreationMatch.resources

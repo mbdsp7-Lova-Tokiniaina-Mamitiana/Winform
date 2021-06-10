@@ -27,5 +27,11 @@ namespace Winform.Forms
             new Login().Show();
             this.Hide();
         }
+
+        private void creationMatch_Click(object sender, EventArgs e)
+        {
+            new CreationMatch().Show();
+
+        }
     }
 }

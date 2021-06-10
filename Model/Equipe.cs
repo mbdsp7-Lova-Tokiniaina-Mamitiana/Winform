@@ -8,10 +8,10 @@ namespace Winform.Model
 {
     class Equipe
     {
-        private string name, description, url_image;
+        private string id,nom, avatar;
 
-        public string Name { get => name; set => name = value; }
-        public string Description { get => description; set => description = value; }
-        public string Url_image { get => url_image; set => url_image = value; }
+        public string Id { get => id; set => id = value; }
+        public string Nom { get => nom; set => nom = value; }
+        public string Avatar { get => avatar; set => avatar = value; }
     }
 }
