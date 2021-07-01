@@ -9,6 +9,8 @@ namespace Winform.Services
     class Config
     {
         public static string apiUrl = "http://localhost:8010/api";
+        public static string apiUrGrails = "https://mbdsp7-grails-app.herokuapp.com/api";
+
         //public static string apiUrl = "https://pari-node.herokuapp.com/api";
     }
 }
