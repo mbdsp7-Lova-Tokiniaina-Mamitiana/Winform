@@ -30,6 +30,8 @@ namespace Winform.Forms
             {
 
                 this.enablePariSection(false);
+                this.terminer.Enabled = false;
+
 
             }
             else
@@ -122,7 +124,43 @@ namespace Winform.Forms
         private void populateDataPari()
         {
             this.dataGridView1.DataSource = listePari;
+            DataGridViewButtonColumn deletebutton = new DataGridViewButtonColumn();
+            deletebutton.Name = "suppression";
+            deletebutton.Text = "Supprimer";
+            deletebutton.UseColumnTextForButtonValue = true;
+
+            
+            int columnIndex = 3;
+            if (dataGridView1.Columns["suppression"] == null)
+            {
+                dataGridView1.Columns.Insert(columnIndex, deletebutton);
+
+                dataGridView1.CellClick += dataGridView_CellClick;
+
+            }
+            dataGridView1.Columns["Id"].Visible = false;
             this.dataGridView1.Update();
+        }
+        private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == dataGridView1.Columns["suppression"].Index)
+            {
+                try
+                {
+                    int index = e.RowIndex;
+                    pariService.RemovePari(dataGridView1.Rows[index].Cells["Id"].Value.ToString(), match.Id);
+                    this.dataGridView1.DataSource = null;
+                    this.dataGridView1.Update();
+                    this.listePari.RemoveAt(index);
+                    this.populateDataPari();
+
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine(exc.Message + ": /n" + exc.StackTrace);
+                    MessageBox.Show(exc.Message);
+                }
+            }
         }
 
         private void ajoutpari_Click(object sender, EventArgs e)

@@ -171,7 +171,7 @@ namespace Winform.Forms
             // 
             // terminer
             // 
-            this.terminer.Location = new System.Drawing.Point(627, 9);
+            this.terminer.Location = new System.Drawing.Point(672, 517);
             this.terminer.Name = "terminer";
             this.terminer.Size = new System.Drawing.Size(75, 23);
             this.terminer.TabIndex = 17;
