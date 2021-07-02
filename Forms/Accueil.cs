@@ -30,7 +30,7 @@ namespace Winform.Forms
 
         private void creationMatch_Click(object sender, EventArgs e)
         {
-            new CreationMatch().Show();
+            new CreationMatch(null).Show();
 
         }
     }

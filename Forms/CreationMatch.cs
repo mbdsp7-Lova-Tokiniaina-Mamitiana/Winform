@@ -15,11 +15,27 @@ namespace Winform.Forms
     public partial class CreationMatch : Form
     {
         private EquipeService equipeService = new EquipeService();
+        private MatchService matchService = new MatchService();
+        private PariService pariService = new PariService();
         private List<Equipe> listeEquipe = null;
-        public CreationMatch()
+        private List<Pari> listePari = new List<Pari>();
+        private Match match = null;
+        public CreationMatch(Match m)
         {
+            this.match = m;
             InitializeComponent();
+           
             this.loadEquipe();
+            if (match == null)
+            {
+
+                this.enablePariSection(false);
+
+            }
+            else
+            {
+                this.enableMatchSection(false);
+            }
 
         }
         private void loadEquipe()
@@ -41,8 +57,53 @@ namespace Winform.Forms
           
 
         }
+        private void enableMatchSection(bool enable)
+        {
+            this.listEquipe1.Enabled = enable;
+            this.listEquipe2.Enabled = enable;
+            this.choix_equipe.Enabled = enable;
+            this.longitude.Enabled = enable;
+            this.latitude.Enabled = enable;
+            this.pictureBox1.Enabled = enable;
+            this.pictureBox2.Enabled = enable;
+            this.dateTimePicker1.Enabled = enable;
+
+        }
+        private void enablePariSection(bool enable)
+        {
+            this.description.Enabled = enable;
+            this.ajoutpari.Enabled = enable;
+            this.cote.Enabled = enable;
+            this.dataGridView1.Enabled = enable;
+        }
+        
         private void choix_equipe_Click(object sender, EventArgs e)
         {
+            Match match = new Match();
+            try
+            {
+                DateTime date = dateTimePicker1.Value;
+                double longitude = System.Convert.ToDouble(this.longitude.Text);
+                double latitude = System.Convert.ToDouble(this.latitude.Text);
+                Equipe domicile = (Equipe)listEquipe1.SelectedItem;
+                Equipe exterieur = (Equipe)listEquipe2.SelectedItem;
+                match.Date = date;
+                match.LocalistionX = longitude;
+                match.LocalisationY = latitude;
+                match.Exterieur = exterieur;
+                match.Domicile = domicile;
+                matchService.CreerMatch(match);
+                this.match = match;
+                enableMatchSection(false);
+                enablePariSection(true);
+
+
+            }
+            catch(Exception exc)
+            {
+                Console.WriteLine(exc.Message + ": /n" + exc.StackTrace);
+                MessageBox.Show(exc.Message);
+            }
 
         }
 
@@ -57,6 +118,51 @@ namespace Winform.Forms
 
             Equipe selected = (Equipe)listEquipe2.SelectedItem;
             this.pictureBox2.Load(selected.Avatar);
+        }
+        private void populateDataPari()
+        {
+            this.dataGridView1.DataSource = listePari;
+            this.dataGridView1.Update();
+        }
+
+        private void ajoutpari_Click(object sender, EventArgs e)
+        {
+            Pari pari = new Pari();
+            try
+            {
+                pari.Description = description.Text;
+                pari.Cote = System.Convert.ToDouble(cote.Text);
+                pariService.CreerPari(pari);
+                pariService.AddPari(pari.Id, match.Id);
+                this.listePari.Add(pari);
+                
+                populateDataPari();
+
+            }catch(Exception exc)
+            {
+                Console.WriteLine(exc.Message+": /n"+exc.StackTrace);
+                MessageBox.Show(exc.Message);
+            }
+        }
+        private List<Pari> getListeSelected()
+        {
+            List<Pari> list = new List<Pari>();
+            return list;
+        }
+        private void terminer_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<Pari> list = getListeSelected();
+
+                matchService.distribuerGain(list, this.match);
+
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine(exc.Message + ": /n" + exc.StackTrace);
+                MessageBox.Show(exc.Message);
+            }
         }
     }
 }

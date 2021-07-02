@@ -30,11 +30,10 @@ namespace Winform.Forms
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.description = new System.Windows.Forms.TextBox();
+            this.ajoutpari = new System.Windows.Forms.Button();
+            this.cote = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button2 = new System.Windows.Forms.Button();
             this.choix_equipe = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.listEquipe1 = new System.Windows.Forms.ComboBox();
@@ -42,8 +41,9 @@ namespace Winform.Forms
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.longitude = new System.Windows.Forms.TextBox();
+            this.latitude = new System.Windows.Forms.TextBox();
+            this.terminer = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -59,29 +59,30 @@ namespace Winform.Forms
             this.label1.TabIndex = 0;
             this.label1.Text = "Creation d\'un match";
             // 
-            // textBox1
+            // description
             // 
-            this.textBox1.Location = new System.Drawing.Point(78, 234);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(549, 50);
-            this.textBox1.TabIndex = 3;
+            this.description.Location = new System.Drawing.Point(78, 241);
+            this.description.Multiline = true;
+            this.description.Name = "description";
+            this.description.Size = new System.Drawing.Size(549, 50);
+            this.description.TabIndex = 3;
             // 
-            // button1
+            // ajoutpari
             // 
-            this.button1.Location = new System.Drawing.Point(314, 293);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Ajouter pari";
-            this.button1.UseVisualStyleBackColor = true;
+            this.ajoutpari.Location = new System.Drawing.Point(314, 304);
+            this.ajoutpari.Name = "ajoutpari";
+            this.ajoutpari.Size = new System.Drawing.Size(75, 23);
+            this.ajoutpari.TabIndex = 4;
+            this.ajoutpari.Text = "Ajouter pari";
+            this.ajoutpari.UseVisualStyleBackColor = true;
+            this.ajoutpari.Click += new System.EventHandler(this.ajoutpari_Click);
             // 
-            // textBox2
+            // cote
             // 
-            this.textBox2.Location = new System.Drawing.Point(409, 293);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(77, 20);
-            this.textBox2.TabIndex = 5;
+            this.cote.Location = new System.Drawing.Point(408, 304);
+            this.cote.Name = "cote";
+            this.cote.Size = new System.Drawing.Size(77, 20);
+            this.cote.TabIndex = 5;
             // 
             // dataGridView1
             // 
@@ -91,22 +92,13 @@ namespace Winform.Forms
             this.dataGridView1.Size = new System.Drawing.Size(549, 250);
             this.dataGridView1.TabIndex = 6;
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(652, 505);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(105, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Sauvegarder";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // choix_equipe
             // 
-            this.choix_equipe.Location = new System.Drawing.Point(314, 81);
+            this.choix_equipe.Location = new System.Drawing.Point(328, 212);
             this.choix_equipe.Name = "choix_equipe";
             this.choix_equipe.Size = new System.Drawing.Size(75, 23);
             this.choix_equipe.TabIndex = 8;
-            this.choix_equipe.Text = "Valider choix equipe";
+            this.choix_equipe.Text = "Creer Match";
             this.choix_equipe.UseVisualStyleBackColor = true;
             this.choix_equipe.Click += new System.EventHandler(this.choix_equipe_Click);
             // 
@@ -114,7 +106,7 @@ namespace Winform.Forms
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(298, 330);
+            this.label2.Location = new System.Drawing.Point(299, 351);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(126, 20);
             this.label2.TabIndex = 9;
@@ -163,27 +155,38 @@ namespace Winform.Forms
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 14;
             // 
-            // textBox3
+            // longitude
             // 
-            this.textBox3.Location = new System.Drawing.Point(314, 154);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 15;
+            this.longitude.Location = new System.Drawing.Point(314, 154);
+            this.longitude.Name = "longitude";
+            this.longitude.Size = new System.Drawing.Size(100, 20);
+            this.longitude.TabIndex = 15;
             // 
-            // textBox4
+            // latitude
             // 
-            this.textBox4.Location = new System.Drawing.Point(314, 186);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 16;
+            this.latitude.Location = new System.Drawing.Point(314, 186);
+            this.latitude.Name = "latitude";
+            this.latitude.Size = new System.Drawing.Size(100, 20);
+            this.latitude.TabIndex = 16;
+            // 
+            // terminer
+            // 
+            this.terminer.Location = new System.Drawing.Point(627, 9);
+            this.terminer.Name = "terminer";
+            this.terminer.Size = new System.Drawing.Size(75, 23);
+            this.terminer.TabIndex = 17;
+            this.terminer.Text = "Terminer Match";
+            this.terminer.UseVisualStyleBackColor = true;
+            this.terminer.Click += new System.EventHandler(this.terminer_Click);
             // 
             // CreationMatch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(791, 739);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.terminer);
+            this.Controls.Add(this.latitude);
+            this.Controls.Add(this.longitude);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
@@ -191,11 +194,10 @@ namespace Winform.Forms
             this.Controls.Add(this.listEquipe1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.choix_equipe);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.cote);
+            this.Controls.Add(this.ajoutpari);
+            this.Controls.Add(this.description);
             this.Controls.Add(this.label1);
             this.Name = "CreationMatch";
             this.Text = "CreationMatch";
@@ -210,11 +212,10 @@ namespace Winform.Forms
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox description;
+        private System.Windows.Forms.Button ajoutpari;
+        private System.Windows.Forms.TextBox cote;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button choix_equipe;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox listEquipe1;
@@ -222,7 +223,8 @@ namespace Winform.Forms
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox longitude;
+        private System.Windows.Forms.TextBox latitude;
+        private System.Windows.Forms.Button terminer;
     }
 }
