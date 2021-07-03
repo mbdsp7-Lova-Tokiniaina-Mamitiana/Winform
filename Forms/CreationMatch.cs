@@ -85,8 +85,17 @@ namespace Winform.Forms
             try
             {
                 DateTime date = dateTimePicker1.Value;
-                double longitude = System.Convert.ToDouble(this.longitude.Text);
-                double latitude = System.Convert.ToDouble(this.latitude.Text);
+                double longitude=0,latitude = 0;
+                try
+                {
+                    longitude = System.Convert.ToDouble(this.longitude.Text);
+                    latitude = System.Convert.ToDouble(this.latitude.Text);
+                }
+                catch(Exception)
+                {
+                    throw new Exception("Longitute ou latitude doit etre fournie");
+                }
+                 
                 Equipe domicile = (Equipe)listEquipe1.SelectedItem;
                 Equipe exterieur = (Equipe)listEquipe2.SelectedItem;
                 match.Date = date;
@@ -98,13 +107,16 @@ namespace Winform.Forms
                 this.match = match;
                 enableMatchSection(false);
                 enablePariSection(true);
+                MessageBox.Show("Match cree", "Creation de match", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 
 
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
+                MessageBox.Show(exc.Message, "Creation de match",MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(exc.Message + ": /n" + exc.StackTrace);
-                MessageBox.Show(exc.Message);
+               // MessageBox.Show(exc.Message);
             }
 
         }
@@ -158,7 +170,8 @@ namespace Winform.Forms
                 catch (Exception exc)
                 {
                     Console.WriteLine(exc.Message + ": /n" + exc.StackTrace);
-                    MessageBox.Show(exc.Message);
+                  //  MessageBox.Show(exc.Message);
+                    MessageBox.Show(exc.Message, "Suppression Pari", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -169,7 +182,15 @@ namespace Winform.Forms
             try
             {
                 pari.Description = description.Text;
-                pari.Cote = System.Convert.ToDouble(cote.Text);
+                try
+                {
+                    pari.Cote = System.Convert.ToDouble(cote.Text);
+                }
+                catch(Exception)
+                {
+                    throw new Exception("Cote doit etre valide");
+                }
+               
                 pariService.CreerPari(pari);
                 pariService.AddPari(pari.Id, match.Id);
                 this.listePari.Add(pari);
@@ -179,7 +200,8 @@ namespace Winform.Forms
             }catch(Exception exc)
             {
                 Console.WriteLine(exc.Message+": /n"+exc.StackTrace);
-                MessageBox.Show(exc.Message);
+
+                MessageBox.Show(exc.Message, "Ajout Pari", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private List<Pari> getListeSelected()
@@ -199,7 +221,7 @@ namespace Winform.Forms
             catch (Exception exc)
             {
                 Console.WriteLine(exc.Message + ": /n" + exc.StackTrace);
-                MessageBox.Show(exc.Message);
+                MessageBox.Show(exc.Message, "Terminer match", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

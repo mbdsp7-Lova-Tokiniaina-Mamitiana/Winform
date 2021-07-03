@@ -42,6 +42,15 @@ namespace Winform.Services
                     JObject obj = JObject.Parse(jsonContent);
                     match.Id = (string)obj["_id"];
                 }
+                else
+                {
+                    var content = result.Content.ReadAsStringAsync();
+                    content.Wait();
+                    string jsonContent = content.Result;
+                    JObject obj = JObject.Parse(jsonContent);
+                    String error = (string)obj["message"];
+                    throw new Exception(error);
+                }
             }
         }
         public void terminerMatchNode(Match match)
