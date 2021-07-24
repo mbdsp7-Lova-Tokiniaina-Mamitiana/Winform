@@ -18,7 +18,7 @@ namespace Winform.Services
             string endpoint = Config.apiUrl + "/match";
             string json = JsonConvert.SerializeObject(new
             {
-                date_match = match.Date.ToString("yyyy-MM-DD HH:mm:ss HH:mm:ss"),
+                date_match = match.Date.ToString("yyyy-MM-dd HH:mm"),
                 longitude = match.LocalistionX,
                 latitude = match.LocalisationY,
                 equipe1 = match.Domicile.Id,

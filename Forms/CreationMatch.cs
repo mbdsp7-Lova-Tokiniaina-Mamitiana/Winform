@@ -24,7 +24,8 @@ namespace Winform.Forms
         {
             this.match = m;
             InitializeComponent();
-           
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.CustomFormat = "dd/MM/yyyy HH:mm";
             this.loadEquipe();
             if (match == null)
             {

@@ -15,7 +15,7 @@ namespace Winform.Services
         {
             List<Equipe> list = new List<Equipe>();
            
-            string endpoint = Config.apiUrl + "/equipes";
+            string endpoint = Config.apiUrl + "/equipes2";
       
 
             using (var client = new HttpClient())
@@ -42,6 +42,7 @@ namespace Winform.Services
                         var myElement = itemProperties.FirstOrDefault(x => x.Name == "_id");
                         var myElementValue = myElement.Value;
                         equipe.Id = (string)myElementValue;
+                        equipe.Avatar = Config.BACKENDURL + equipe.Avatar;
                         list.Add(equipe);
                     }
                  
