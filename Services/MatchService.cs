@@ -12,6 +12,8 @@ namespace Winform.Services
 {
     public class MatchService
     {
+        public static int nbresults =0;
+        public static int nbrpages = 1;
         public void CreerMatch(Match match)
         {
 
@@ -138,6 +140,102 @@ namespace Winform.Services
             }
             terminerMatchGrails(match);
             terminerMatchNode(match);
+        }
+        public List<Match> GetMatches(String search,bool etat,bool isToday,DateTime dateDebut,DateTime dateFin,int page,int limit)
+        {
+            List<Match> liste = new List<Match>();
+            string endpoint = Config.apiUrl + "/matchs/search";
+         
+            Dictionary<string, string> body =
+                new Dictionary<string, string>();
+            body.Add("etat", (etat+"").ToLower());
+            body.Add("page", ""+page);
+            body.Add("limit", "" + limit);
+            if (!string.IsNullOrEmpty(search))
+            {
+                body.Add("pari", search);
+                body.Add("equipe", search);
+            }
+            if (isToday)
+            {
+                body.Add("isToday", (isToday+"").ToLower());
+            }
+            else
+            {
+                dateDebut = new DateTime(dateDebut.Year, dateDebut.Month, dateDebut.Day, 0, 0, 0);
+                dateFin = new DateTime(dateFin.Year, dateFin.Month, dateFin.Day, 23, 59, 0);
+                body.Add("date_debut", dateDebut.ToString("yyyy-MM-dd"));
+
+                body.Add("date_fin", dateFin.ToString("yyyy-MM-dd"));
+            }
+            string json = JsonConvert.SerializeObject(body);
+            using (var client = new HttpClient())
+            {
+                var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+                var postTask = client.PostAsync(endpoint, httpContent);
+
+                postTask.Wait();
+
+                var result = postTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var content = result.Content.ReadAsStringAsync();
+                    content.Wait();
+                    string jsonContent = content.Result;
+                    JObject o = JObject.Parse(jsonContent);
+                    if (o != null)
+                    {
+                        String jsonArray = o.Children<JProperty>().FirstOrDefault(x => x.Name == "docs").Value.ToString();
+                        JArray array = JArray.Parse(jsonArray);
+                        nbresults = System.Convert.ToInt32((String)o.Children<JProperty>().FirstOrDefault(x => x.Name == "totalDocs").Value);
+                        nbrpages = System.Convert.ToInt32((String)o.Children<JProperty>().FirstOrDefault(x => x.Name == "totalPages").Value);
+                        foreach (var item in array)
+                        {
+                            Match m = item.ToObject<Match>();
+                            String itemString = item.ToString();
+                           
+                            dynamic match = JObject.Parse(itemString);
+                            m.Date = match.date_match;
+                            m.Date = m.Date.AddHours(3);
+                            m.LocalisationY = match.longitude;
+                            m.LocalistionX = match.latitude;
+                            m.Domicile = new Equipe();
+                            m.Exterieur = new Equipe();
+                            dynamic equipe1 = match.equipe1;
+                            
+                            m.Domicile.Nom = equipe1.nom;
+                            m.Domicile.Avatar = equipe1.avatar;
+                            m.Id = equipe1._id;
+                            dynamic equipe2 =  match.equipe2;
+                            
+                            m.Exterieur.Nom = equipe2.nom;
+                            m.Exterieur.Avatar = equipe2.avatar;
+                            m.Exterieur.Id = equipe2._id;
+                            m.Etat = match.etat;
+                            JArray ap = match.pari;
+                            foreach(var i in ap)
+                            {
+                                String s = i.ToString();
+                                dynamic pari = JObject.Parse(s);
+                                Pari p = new Pari();
+                                p.Id = pari._id;
+                                p.Cote = pari.cote;
+                                p.Description = pari.description;
+                                m.ListePari.Add(p);
+                            }
+
+                            //you could do a foreach or a linq here depending on what you need to do exactly with the value
+
+                            liste.Add(m);
+                        }
+                    }
+                }
+                else
+                {
+                    throw new Exception("Erreur d'acces aux serveurs");
+                }
+            }
+            return liste;
         }
     }
 }

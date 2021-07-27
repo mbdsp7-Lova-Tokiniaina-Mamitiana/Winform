@@ -33,9 +33,12 @@ namespace Winform.Forms
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.creationMatch = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.searchBox = new System.Windows.Forms.TextBox();
+            this.searchbutton = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.etatBox = new System.Windows.Forms.CheckBox();
+            this.isTodayBox = new System.Windows.Forms.CheckBox();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,37 +80,68 @@ namespace Winform.Forms
             this.creationMatch.UseVisualStyleBackColor = true;
             this.creationMatch.Click += new System.EventHandler(this.creationMatch_Click);
             // 
-            // textBox1
+            // searchBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(122, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(199, 20);
-            this.textBox1.TabIndex = 4;
+            this.searchBox.Location = new System.Drawing.Point(122, 12);
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(199, 20);
+            this.searchBox.TabIndex = 4;
             // 
-            // button2
+            // searchbutton
             // 
-            this.button2.Location = new System.Drawing.Point(336, 9);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Rechercher";
-            this.button2.UseVisualStyleBackColor = true;
+            this.searchbutton.Location = new System.Drawing.Point(336, 9);
+            this.searchbutton.Name = "searchbutton";
+            this.searchbutton.Size = new System.Drawing.Size(75, 23);
+            this.searchbutton.TabIndex = 5;
+            this.searchbutton.Text = "Rechercher";
+            this.searchbutton.UseVisualStyleBackColor = true;
+            this.searchbutton.Click += new System.EventHandler(this.searchbutton_Click);
             // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.Location = new System.Drawing.Point(122, 37);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(83, 20);
+            this.dateTimePicker1.Size = new System.Drawing.Size(127, 20);
             this.dateTimePicker1.TabIndex = 6;
+            // 
+            // etatBox
+            // 
+            this.etatBox.AutoSize = true;
+            this.etatBox.Location = new System.Drawing.Point(435, 14);
+            this.etatBox.Name = "etatBox";
+            this.etatBox.Size = new System.Drawing.Size(69, 17);
+            this.etatBox.TabIndex = 7;
+            this.etatBox.Text = "Terminés";
+            this.etatBox.UseVisualStyleBackColor = true;
+            // 
+            // isTodayBox
+            // 
+            this.isTodayBox.AutoSize = true;
+            this.isTodayBox.Location = new System.Drawing.Point(511, 14);
+            this.isTodayBox.Name = "isTodayBox";
+            this.isTodayBox.Size = new System.Drawing.Size(78, 17);
+            this.isTodayBox.TabIndex = 8;
+            this.isTodayBox.Text = "Aujourd\'hui";
+            this.isTodayBox.UseVisualStyleBackColor = true;
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Location = new System.Drawing.Point(265, 36);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(127, 20);
+            this.dateTimePicker2.TabIndex = 9;
             // 
             // Accueil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 664);
+            this.Controls.Add(this.dateTimePicker2);
+            this.Controls.Add(this.isTodayBox);
+            this.Controls.Add(this.etatBox);
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.searchbutton);
+            this.Controls.Add(this.searchBox);
             this.Controls.Add(this.creationMatch);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
@@ -126,8 +160,11 @@ namespace Winform.Forms
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button creationMatch;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox searchBox;
+        private System.Windows.Forms.Button searchbutton;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.CheckBox etatBox;
+        private System.Windows.Forms.CheckBox isTodayBox;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
     }
 }

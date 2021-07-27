@@ -94,12 +94,13 @@ namespace Winform.Forms
             // 
             // choix_equipe
             // 
+            this.choix_equipe.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.choix_equipe.Location = new System.Drawing.Point(328, 212);
             this.choix_equipe.Name = "choix_equipe";
             this.choix_equipe.Size = new System.Drawing.Size(75, 23);
             this.choix_equipe.TabIndex = 8;
             this.choix_equipe.Text = "Creer Match";
-            this.choix_equipe.UseVisualStyleBackColor = true;
+            this.choix_equipe.UseVisualStyleBackColor = false;
             this.choix_equipe.Click += new System.EventHandler(this.choix_equipe_Click);
             // 
             // label2
