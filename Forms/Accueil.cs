@@ -25,7 +25,7 @@ namespace Winform.Forms
 
             InitializeComponent();
             setDate();
-            
+          
             rechercher();
         }
         private void setDate()
@@ -50,16 +50,83 @@ namespace Winform.Forms
             new CreationMatch(null).Show();
 
         }
+        private void setDataGridView()
+        {
+
+          
+
+            DataGridViewButtonColumn deletebutton = new DataGridViewButtonColumn();
+            deletebutton.Name = "terminer";
+            deletebutton.Text = "Terminer";
+            
+            deletebutton.UseColumnTextForButtonValue = true;
+            DataGridViewButtonColumn voirbutton = new DataGridViewButtonColumn();
+            voirbutton.Name = "voir";
+            voirbutton.Text = "Voir";
+            voirbutton.UseColumnTextForButtonValue = true;
+            if (dataGridView1.Columns["terminer"] == null)
+            {
+               if(!etatBox.Checked)
+                dataGridView1.Columns.Insert(5, deletebutton);
+
+
+            }
+           
+            if (dataGridView1.Columns["voir"] == null)
+            {
+                dataGridView1.Columns.Insert(4, voirbutton);
+
+
+            }
+            DataGridViewButtonColumn deletebutton2 = new DataGridViewButtonColumn();
+            deletebutton2.Name = "supprimer";
+            deletebutton2.Text = "Supprimer";
+
+            deletebutton2.UseColumnTextForButtonValue = true;
+            if (dataGridView1.Columns["supprimer"] == null)
+            {
+                dataGridView1.Columns.Insert(7, deletebutton2);
+
+
+            }
+            dataGridView1.Columns["Id"].Visible = false;
+            dataGridView1.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridView1.Columns["LocalisationY"].Visible = false;
+            dataGridView1.Columns["LocalistionX"].Visible = false;
+            dataGridView1.Columns["Etat"].Visible = false;
+            this.dataGridView1.Update();
+        }
         private void populateData()
         {
             this.nbrpages = MatchService.nbrpages;
             this.totals = MatchService.nbresults;
+            if (page == 1)
+            {
+                this.previous.Visible = false;
+            }
+            else
+            {
+                this.previous.Visible = true;
+            }
+            if (page >= nbrpages)
+            {
+                this.Suivant.Visible = false;
+            }
+            else
+            {
+                this.Suivant.Visible = true;
+            }
+          //  dataGridView1.Rows.Clear();
+            dataGridView1.Columns.Clear();
+            dataGridView1.Refresh();
             this.dataGridView1.DataSource = this.liste;
+            setDataGridView();
         }
         private void rechercher()
         {
             try
             {
+
                 this.liste = matchService.GetMatches(searchBox.Text, etatBox.Checked, isTodayBox.Checked,dateTimePicker1.Value,dateTimePicker2.Value,page,max);
                 populateData();
             }catch(Exception exc)

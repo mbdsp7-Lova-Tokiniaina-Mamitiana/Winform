@@ -39,6 +39,8 @@ namespace Winform.Forms
             this.etatBox = new System.Windows.Forms.CheckBox();
             this.isTodayBox = new System.Windows.Forms.CheckBox();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.previous = new System.Windows.Forms.Button();
+            this.Suivant = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,10 +56,11 @@ namespace Winform.Forms
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(13, 100);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(638, 530);
+            this.dataGridView1.Size = new System.Drawing.Size(537, 530);
             this.dataGridView1.TabIndex = 1;
             // 
             // label1
@@ -131,11 +134,31 @@ namespace Winform.Forms
             this.dateTimePicker2.Size = new System.Drawing.Size(127, 20);
             this.dateTimePicker2.TabIndex = 9;
             // 
+            // previous
+            // 
+            this.previous.Location = new System.Drawing.Point(13, 636);
+            this.previous.Name = "previous";
+            this.previous.Size = new System.Drawing.Size(75, 23);
+            this.previous.TabIndex = 10;
+            this.previous.Text = "Precedent";
+            this.previous.UseVisualStyleBackColor = true;
+            // 
+            // Suivant
+            // 
+            this.Suivant.Location = new System.Drawing.Point(475, 636);
+            this.Suivant.Name = "Suivant";
+            this.Suivant.Size = new System.Drawing.Size(75, 23);
+            this.Suivant.TabIndex = 11;
+            this.Suivant.Text = "Suivant";
+            this.Suivant.UseVisualStyleBackColor = true;
+            // 
             // Accueil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 664);
+            this.ClientSize = new System.Drawing.Size(820, 718);
+            this.Controls.Add(this.Suivant);
+            this.Controls.Add(this.previous);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.isTodayBox);
             this.Controls.Add(this.etatBox);
@@ -166,5 +189,7 @@ namespace Winform.Forms
         private System.Windows.Forms.CheckBox etatBox;
         private System.Windows.Forms.CheckBox isTodayBox;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.Button previous;
+        private System.Windows.Forms.Button Suivant;
     }
 }

@@ -81,6 +81,32 @@ namespace Winform.Services
                 }
             }
         }
+        public void supprimerMatch(Match match)
+        {
+
+            string endpoint = Config.apiUrl + "/terminerMatch";
+            string json = JsonConvert.SerializeObject(new
+            {
+                match = match.Id
+            });
+            using (var client = new HttpClient())
+            {
+                var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+                var postTask = client.PostAsync(endpoint, httpContent);
+
+                postTask.Wait();
+
+                var result = postTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+
+                }
+                else
+                {
+                    throw new Exception("Erreur terminer match");
+                }
+            }
+        }
         public void terminerMatchGrails(Match match)
         {
             string endpoint = Config.apiUrGrails + "/terminermatch";
@@ -223,6 +249,7 @@ namespace Winform.Services
                                 p.Description = pari.description;
                                 m.ListePari.Add(p);
                             }
+                            m.Description = m.Domicile.Nom + " - " + m.Exterieur.Nom;
 
                             //you could do a foreach or a linq here depending on what you need to do exactly with the value
 
