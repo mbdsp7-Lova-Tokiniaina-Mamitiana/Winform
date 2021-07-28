@@ -41,5 +41,10 @@ namespace Winform
                 MessageBox.Show(exc.Message);
             }
         }
+
+        private void textLogin_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -45,6 +45,7 @@ namespace Winform
             this.textLogin.Name = "textLogin";
             this.textLogin.Size = new System.Drawing.Size(290, 27);
             this.textLogin.TabIndex = 0;
+            this.textLogin.TextChanged += new System.EventHandler(this.textLogin_TextChanged);
             // 
             // textPassword
             // 
@@ -70,7 +71,7 @@ namespace Winform
             // 
             this.button1.BackColor = System.Drawing.Color.ForestGreen;
             this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.SystemColors.Control;
             this.button1.Location = new System.Drawing.Point(30, 354);

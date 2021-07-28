@@ -61,6 +61,7 @@ namespace Winform.Forms
             
             deletebutton.UseColumnTextForButtonValue = true;
             DataGridViewButtonColumn voirbutton = new DataGridViewButtonColumn();
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Tahoma", 8.5F, FontStyle.Bold);
             voirbutton.Name = "voir";
             voirbutton.Text = "Voir";
             voirbutton.UseColumnTextForButtonValue = true;
@@ -98,6 +99,29 @@ namespace Winform.Forms
             dataGridView1.Columns["Etat"].Visible = false;
             this.dataGridView1.Update();
         }
+
+        private void previous_Click(object sender, EventArgs e)
+        {
+            this.page = page - 1;
+            rechercher();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void Suivant_Click(object sender, EventArgs e)
+        {
+            this.page = page + 1;
+            rechercher();
+        }
+
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == dataGridView1.Columns["voir"].Index)
@@ -160,6 +184,8 @@ namespace Winform.Forms
             {
                 this.Suivant.Visible = true;
             }
+            this.results.Text = totals + " resultat(s)";
+            this.pages.Text = this.page + "/" + this.nbrpages;
           //  dataGridView1.Rows.Clear();
             dataGridView1.Columns.Clear();
             dataGridView1.Refresh();

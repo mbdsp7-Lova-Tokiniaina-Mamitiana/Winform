@@ -15,6 +15,7 @@ namespace Winform.Services
     {
         public static int nbresults =0;
         public static int nbrpages = 1;
+       
         public void CreerMatch(Match match)
         {
 
@@ -62,7 +63,7 @@ namespace Winform.Services
             string endpoint = Config.apiUrl + "/terminerMatch";
             string json = JsonConvert.SerializeObject(new
             {
-                match = match.Id
+                id = match.Id
             });
             using (var client = new HttpClient())
             {
@@ -234,6 +235,7 @@ namespace Winform.Services
                             m.Domicile.Avatar = Config.BACKENDURL + m.Domicile.Avatar;
                             m.Exterieur.Avatar = Config.BACKENDURL + m.Exterieur.Avatar;
                             JArray ap = match.pari;
+                            if (ap != null) { 
                             foreach(var i in ap)
                             {
                                 String s = i.ToString();
@@ -243,6 +245,7 @@ namespace Winform.Services
                                 p.Cote = pari.cote;
                                 p.Description = pari.description;
                                 m.ListePari.Add(p);
+                            }
                             }
                             m.Description = m.Domicile.Nom + " - " + m.Exterieur.Nom;
 
