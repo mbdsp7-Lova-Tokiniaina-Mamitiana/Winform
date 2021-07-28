@@ -44,6 +44,7 @@ namespace Winform.Forms
             this.longitude = new System.Windows.Forms.TextBox();
             this.latitude = new System.Windows.Forms.TextBox();
             this.terminer = new System.Windows.Forms.Button();
+            this.supprimer = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -180,11 +181,22 @@ namespace Winform.Forms
             this.terminer.UseVisualStyleBackColor = true;
             this.terminer.Click += new System.EventHandler(this.terminer_Click);
             // 
+            // supprimer
+            // 
+            this.supprimer.Location = new System.Drawing.Point(518, 13);
+            this.supprimer.Name = "supprimer";
+            this.supprimer.Size = new System.Drawing.Size(75, 23);
+            this.supprimer.TabIndex = 18;
+            this.supprimer.Text = "Supprimer";
+            this.supprimer.UseVisualStyleBackColor = true;
+            this.supprimer.Click += new System.EventHandler(this.supprimer_Click);
+            // 
             // CreationMatch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(791, 739);
+            this.Controls.Add(this.supprimer);
             this.Controls.Add(this.terminer);
             this.Controls.Add(this.latitude);
             this.Controls.Add(this.longitude);
@@ -227,5 +239,6 @@ namespace Winform.Forms
         private System.Windows.Forms.TextBox longitude;
         private System.Windows.Forms.TextBox latitude;
         private System.Windows.Forms.Button terminer;
+        private System.Windows.Forms.Button supprimer;
     }
 }

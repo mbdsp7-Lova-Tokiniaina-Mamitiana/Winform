@@ -20,6 +20,7 @@ namespace Winform.Forms
         private List<Equipe> listeEquipe = null;
         private List<Pari> listePari = new List<Pari>();
         private Match match = null;
+        private bool canTermine = false;
         public CreationMatch(Match m)
         {
             this.match = m;
@@ -32,14 +33,52 @@ namespace Winform.Forms
 
                 this.enablePariSection(false);
                 this.terminer.Enabled = false;
+                supprimer.Enabled = false;
 
 
             }
             else
             {
+                canTermine = true;
+                this.listePari = m.ListePari;
+                populateDataPari();
+                this.listEquipe1.SelectedIndex = getIndexEquipe(m.Domicile);
+                this.listEquipe2.SelectedIndex = getIndexEquipe(m.Exterieur);
+                this.pictureBox1.Load(m.Domicile.Avatar);
+                this.pictureBox2.Load(m.Exterieur.Avatar);
+                if (m.Etat)
+                {
+                    this.enablePariSection(false);
+                }
+                else
+                {
+                    if (canTermine)
+                    {
+                        this.terminer.Enabled = true;
+                    }
+                    else
+                    {
+                        this.terminer.Enabled = false;
+                    }
+
+                }
                 this.enableMatchSection(false);
             }
 
+        }
+        private int getIndexEquipe(Equipe e)
+        {
+           
+            int i = 0;
+            foreach(Equipe e1 in listeEquipe)
+            {
+                if (e1.Nom.Equals(e.Nom))
+                {
+                    return i;
+                }
+                i++;
+            }
+            return 0;
         }
         private void loadEquipe()
         {
@@ -78,6 +117,7 @@ namespace Winform.Forms
             this.ajoutpari.Enabled = enable;
             this.cote.Enabled = enable;
             this.dataGridView1.Enabled = enable;
+            this.terminer.Enabled = enable;
         }
         
         private void choix_equipe_Click(object sender, EventArgs e)
@@ -108,6 +148,7 @@ namespace Winform.Forms
                 this.match = match;
                 enableMatchSection(false);
                 enablePariSection(true);
+                supprimer.Enabled = true;
                 MessageBox.Show("Match cree", "Creation de match", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
@@ -136,23 +177,28 @@ namespace Winform.Forms
         }
         private void populateDataPari()
         {
+            
+          
             this.dataGridView1.DataSource = listePari;
+           
             DataGridViewButtonColumn deletebutton = new DataGridViewButtonColumn();
             deletebutton.Name = "suppression";
             deletebutton.Text = "Supprimer";
             deletebutton.UseColumnTextForButtonValue = true;
 
             
-            int columnIndex = 3;
+            
             if (dataGridView1.Columns["suppression"] == null)
             {
-                dataGridView1.Columns.Insert(columnIndex, deletebutton);
+                dataGridView1.Columns.Insert(3, deletebutton);
 
                 dataGridView1.CellClick += dataGridView_CellClick;
 
             }
+            
             dataGridView1.Columns["Id"].Visible = false;
-            this.dataGridView1.Update();
+          //  dataGridView1.Update();
+            
         }
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -164,6 +210,7 @@ namespace Winform.Forms
                     pariService.RemovePari(dataGridView1.Rows[index].Cells["Id"].Value.ToString(), match.Id);
                     this.dataGridView1.DataSource = null;
                     this.dataGridView1.Update();
+                    this.dataGridView1.Columns.Clear();
                     this.listePari.RemoveAt(index);
                     this.populateDataPari();
 
@@ -194,6 +241,9 @@ namespace Winform.Forms
                
                 pariService.CreerPari(pari);
                 pariService.AddPari(pari.Id, match.Id);
+                this.dataGridView1.DataSource = null;
+                this.dataGridView1.Update();
+                this.dataGridView1.Columns.Clear();
                 this.listePari.Add(pari);
                 
                 populateDataPari();
@@ -208,6 +258,12 @@ namespace Winform.Forms
         private List<Pari> getListeSelected()
         {
             List<Pari> list = new List<Pari>();
+            foreach (DataGridViewRow r in dataGridView1.SelectedRows)
+            {
+                int index = r.Index;
+                Pari p = listePari[index];
+                list.Add(p);
+            }
             return list;
         }
         private void terminer_Click(object sender, EventArgs e)
@@ -215,14 +271,35 @@ namespace Winform.Forms
             try
             {
                 List<Pari> list = getListeSelected();
-
+                
                 matchService.distribuerGain(list, this.match);
+                terminer.Enabled = false;
+                MessageBox.Show("Le match est terminé", "Match", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
             catch (Exception exc)
             {
                 Console.WriteLine(exc.Message + ": /n" + exc.StackTrace);
                 MessageBox.Show(exc.Message, "Terminer match", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void supprimer_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult res = MessageBox.Show("Etes vous sur de vouloir supprimer ce match?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (res == DialogResult.OK)
+                {
+                    matchService.supprimerMatch(match);
+                    this.Hide();
+                   
+                }
+                
+                
+            }catch(Exception exc)
+            {
+                MessageBox.Show(exc.Message, "Suppression match", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

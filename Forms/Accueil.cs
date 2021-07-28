@@ -66,8 +66,8 @@ namespace Winform.Forms
             voirbutton.UseColumnTextForButtonValue = true;
             if (dataGridView1.Columns["terminer"] == null)
             {
-               if(!etatBox.Checked)
-                dataGridView1.Columns.Insert(5, deletebutton);
+              
+              //  dataGridView1.Columns.Insert(5, deletebutton);
 
 
             }
@@ -75,6 +75,8 @@ namespace Winform.Forms
             if (dataGridView1.Columns["voir"] == null)
             {
                 dataGridView1.Columns.Insert(4, voirbutton);
+
+                dataGridView1.CellClick += dataGridView_CellClick;
 
 
             }
@@ -95,6 +97,48 @@ namespace Winform.Forms
             dataGridView1.Columns["LocalistionX"].Visible = false;
             dataGridView1.Columns["Etat"].Visible = false;
             this.dataGridView1.Update();
+        }
+        private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == dataGridView1.Columns["voir"].Index)
+            {
+                try
+                {
+                    int index = e.RowIndex;
+                    Match m = liste[index];
+                    CreationMatch c = new CreationMatch(m);
+                    c.Show();
+
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine(exc.Message + ": /n" + exc.StackTrace);
+                    //  MessageBox.Show(exc.Message);
+                   
+                }
+            }
+            if (e.ColumnIndex == dataGridView1.Columns["supprimer"].Index)
+            {
+                try
+                {
+                    int index = e.RowIndex;
+                    Match m = liste[index];
+                    DialogResult res = MessageBox.Show("Etes vous sur de vouloir supprimer le match "+m.Description+" ?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    if (res == DialogResult.OK)
+                    {
+                        matchService.supprimerMatch(m);
+                        //this.liste.Remove(m);
+                        rechercher();
+                    }
+
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine(exc.Message + ": /n" + exc.StackTrace);
+                    //  MessageBox.Show(exc.Message);
+
+                }
+            }
         }
         private void populateData()
         {

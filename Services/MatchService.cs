@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -83,28 +84,20 @@ namespace Winform.Services
         }
         public void supprimerMatch(Match match)
         {
-
-            string endpoint = Config.apiUrl + "/terminerMatch";
-            string json = JsonConvert.SerializeObject(new
+            try
             {
-                match = match.Id
-            });
-            using (var client = new HttpClient())
+
+            
+
+            string endpoint = Config.apiUrl + "/match/"+match.Id;
+            WebRequest request = WebRequest.Create(endpoint);
+            request.Method = "DELETE";
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                
+            }catch(Exception exc)
             {
-                var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-                var postTask = client.PostAsync(endpoint, httpContent);
-
-                postTask.Wait();
-
-                var result = postTask.Result;
-                if (result.IsSuccessStatusCode)
-                {
-
-                }
-                else
-                {
-                    throw new Exception("Erreur terminer match");
-                }
+                throw new Exception("Une erreur s'est produite lors de la suppression");
             }
         }
         public void terminerMatchGrails(Match match)
@@ -231,13 +224,15 @@ namespace Winform.Services
                             
                             m.Domicile.Nom = equipe1.nom;
                             m.Domicile.Avatar = equipe1.avatar;
-                            m.Id = equipe1._id;
+                            m.Domicile.Id = equipe1._id;
                             dynamic equipe2 =  match.equipe2;
                             
                             m.Exterieur.Nom = equipe2.nom;
                             m.Exterieur.Avatar = equipe2.avatar;
                             m.Exterieur.Id = equipe2._id;
                             m.Etat = match.etat;
+                            m.Domicile.Avatar = Config.BACKENDURL + m.Domicile.Avatar;
+                            m.Exterieur.Avatar = Config.BACKENDURL + m.Exterieur.Avatar;
                             JArray ap = match.pari;
                             foreach(var i in ap)
                             {
