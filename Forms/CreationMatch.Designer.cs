@@ -45,9 +45,15 @@ namespace Winform.Forms
             this.latitude = new System.Windows.Forms.TextBox();
             this.terminer = new System.Windows.Forms.Button();
             this.supprimer = new System.Windows.Forms.Button();
+            this.loading = new System.Windows.Forms.PictureBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loading)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -62,7 +68,7 @@ namespace Winform.Forms
             // 
             // description
             // 
-            this.description.Location = new System.Drawing.Point(78, 241);
+            this.description.Location = new System.Drawing.Point(78, 286);
             this.description.Multiline = true;
             this.description.Name = "description";
             this.description.Size = new System.Drawing.Size(549, 50);
@@ -70,17 +76,19 @@ namespace Winform.Forms
             // 
             // ajoutpari
             // 
-            this.ajoutpari.Location = new System.Drawing.Point(314, 304);
+            this.ajoutpari.BackColor = System.Drawing.Color.Orange;
+            this.ajoutpari.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ajoutpari.Location = new System.Drawing.Point(328, 402);
             this.ajoutpari.Name = "ajoutpari";
             this.ajoutpari.Size = new System.Drawing.Size(75, 23);
             this.ajoutpari.TabIndex = 4;
             this.ajoutpari.Text = "Ajouter pari";
-            this.ajoutpari.UseVisualStyleBackColor = true;
+            this.ajoutpari.UseVisualStyleBackColor = false;
             this.ajoutpari.Click += new System.EventHandler(this.ajoutpari_Click);
             // 
             // cote
             // 
-            this.cote.Location = new System.Drawing.Point(408, 304);
+            this.cote.Location = new System.Drawing.Point(328, 360);
             this.cote.Name = "cote";
             this.cote.Size = new System.Drawing.Size(77, 20);
             this.cote.TabIndex = 5;
@@ -88,7 +96,7 @@ namespace Winform.Forms
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(78, 393);
+            this.dataGridView1.Location = new System.Drawing.Point(78, 477);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(549, 250);
             this.dataGridView1.TabIndex = 6;
@@ -96,7 +104,8 @@ namespace Winform.Forms
             // choix_equipe
             // 
             this.choix_equipe.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.choix_equipe.Location = new System.Drawing.Point(328, 212);
+            this.choix_equipe.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.choix_equipe.Location = new System.Drawing.Point(328, 235);
             this.choix_equipe.Name = "choix_equipe";
             this.choix_equipe.Size = new System.Drawing.Size(75, 23);
             this.choix_equipe.TabIndex = 8;
@@ -108,7 +117,7 @@ namespace Winform.Forms
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(299, 351);
+            this.label2.Location = new System.Drawing.Point(299, 445);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(126, 20);
             this.label2.TabIndex = 9;
@@ -159,43 +168,103 @@ namespace Winform.Forms
             // 
             // longitude
             // 
-            this.longitude.Location = new System.Drawing.Point(314, 154);
+            this.longitude.Location = new System.Drawing.Point(314, 165);
             this.longitude.Name = "longitude";
             this.longitude.Size = new System.Drawing.Size(100, 20);
             this.longitude.TabIndex = 15;
             // 
             // latitude
             // 
-            this.latitude.Location = new System.Drawing.Point(314, 186);
+            this.latitude.Location = new System.Drawing.Point(314, 209);
             this.latitude.Name = "latitude";
             this.latitude.Size = new System.Drawing.Size(100, 20);
             this.latitude.TabIndex = 16;
             // 
             // terminer
             // 
+            this.terminer.BackColor = System.Drawing.Color.OrangeRed;
+            this.terminer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.terminer.Location = new System.Drawing.Point(672, 517);
             this.terminer.Name = "terminer";
             this.terminer.Size = new System.Drawing.Size(75, 23);
             this.terminer.TabIndex = 17;
             this.terminer.Text = "Terminer Match";
-            this.terminer.UseVisualStyleBackColor = true;
+            this.terminer.UseVisualStyleBackColor = false;
             this.terminer.Click += new System.EventHandler(this.terminer_Click);
             // 
             // supprimer
             // 
+            this.supprimer.BackColor = System.Drawing.Color.Red;
+            this.supprimer.FlatAppearance.BorderSize = 0;
+            this.supprimer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.supprimer.ForeColor = System.Drawing.SystemColors.Window;
             this.supprimer.Location = new System.Drawing.Point(518, 13);
             this.supprimer.Name = "supprimer";
             this.supprimer.Size = new System.Drawing.Size(75, 23);
             this.supprimer.TabIndex = 18;
             this.supprimer.Text = "Supprimer";
-            this.supprimer.UseVisualStyleBackColor = true;
+            this.supprimer.UseVisualStyleBackColor = false;
             this.supprimer.Click += new System.EventHandler(this.supprimer_Click);
+            // 
+            // loading
+            // 
+            this.loading.Image = global::Winform.Properties.Resources._1496__1_;
+            this.loading.Location = new System.Drawing.Point(339, 42);
+            this.loading.Name = "loading";
+            this.loading.Size = new System.Drawing.Size(64, 60);
+            this.loading.TabIndex = 19;
+            this.loading.TabStop = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(311, 261);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(114, 13);
+            this.label3.TabIndex = 20;
+            this.label3.Text = "Description du pari";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(341, 344);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(32, 13);
+            this.label4.TabIndex = 21;
+            this.label4.Text = "cote";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(314, 146);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 13);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "longitude";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(317, 192);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(49, 13);
+            this.label6.TabIndex = 23;
+            this.label6.Text = "latitude";
             // 
             // CreationMatch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(791, 739);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.loading);
             this.Controls.Add(this.supprimer);
             this.Controls.Add(this.terminer);
             this.Controls.Add(this.latitude);
@@ -217,6 +286,7 @@ namespace Winform.Forms
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loading)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -240,5 +310,10 @@ namespace Winform.Forms
         private System.Windows.Forms.TextBox latitude;
         private System.Windows.Forms.Button terminer;
         private System.Windows.Forms.Button supprimer;
+        private System.Windows.Forms.PictureBox loading;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }

@@ -20,6 +20,7 @@ namespace Winform.Services
         {
 
             string endpoint = Config.apiUrl + "/match";
+          
             string json = JsonConvert.SerializeObject(new
             {
                 date_match = match.Date.ToString("yyyy-MM-dd HH:mm"),
@@ -28,7 +29,8 @@ namespace Winform.Services
                 equipe1 = match.Domicile.Id,
                 equipe2 = match.Exterieur.Id,
                 etat = false,
-            });
+               
+            }) ; 
             using (var client = new HttpClient())
             {
                 var httpContent = new StringContent(json, Encoding.UTF8, "application/json");

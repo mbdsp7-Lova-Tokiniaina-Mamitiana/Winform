@@ -28,6 +28,7 @@ namespace Winform.Forms
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.CustomFormat = "dd/MM/yyyy HH:mm";
             this.loadEquipe();
+            hideLoader();
             if (match == null)
             {
 
@@ -119,12 +120,21 @@ namespace Winform.Forms
             this.dataGridView1.Enabled = enable;
             this.terminer.Enabled = enable;
         }
-        
+        private void showLoader()
+        {
+            this.loading.Visible = true;
+            this.loading.Refresh();
+        }
+        private void hideLoader()
+        {
+            this.loading.Visible = false;
+        }
         private void choix_equipe_Click(object sender, EventArgs e)
         {
             Match match = new Match();
             try
             {
+                showLoader();
                 DateTime date = dateTimePicker1.Value;
                 double longitude=0,latitude = 0;
                 try
@@ -150,12 +160,13 @@ namespace Winform.Forms
                 enablePariSection(true);
                 supprimer.Enabled = true;
                 MessageBox.Show("Match cree", "Creation de match", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                hideLoader();
 
 
             }
             catch (Exception exc)
             {
+                hideLoader();
                 MessageBox.Show(exc.Message, "Creation de match",MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(exc.Message + ": /n" + exc.StackTrace);
                // MessageBox.Show(exc.Message);
@@ -229,6 +240,7 @@ namespace Winform.Forms
             Pari pari = new Pari();
             try
             {
+                showLoader();
                 pari.Description = description.Text;
                 try
                 {
@@ -245,11 +257,12 @@ namespace Winform.Forms
                 this.dataGridView1.Update();
                 this.dataGridView1.Columns.Clear();
                 this.listePari.Add(pari);
-                
+                hideLoader();
                 populateDataPari();
-
+                
             }catch(Exception exc)
             {
+                hideLoader();
                 Console.WriteLine(exc.Message+": /n"+exc.StackTrace);
 
                 MessageBox.Show(exc.Message, "Ajout Pari", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -270,15 +283,18 @@ namespace Winform.Forms
         {
             try
             {
+                showLoader();
                 List<Pari> list = getListeSelected();
                 
                 matchService.distribuerGain(list, this.match);
                 terminer.Enabled = false;
                 MessageBox.Show("Le match est terminé", "Match", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                hideLoader();
 
             }
             catch (Exception exc)
             {
+                hideLoader();
                 Console.WriteLine(exc.Message + ": /n" + exc.StackTrace);
                 MessageBox.Show(exc.Message, "Terminer match", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -288,6 +304,7 @@ namespace Winform.Forms
         {
             try
             {
+                showLoader();
                 DialogResult res = MessageBox.Show("Etes vous sur de vouloir supprimer ce match?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                 if (res == DialogResult.OK)
                 {
@@ -295,10 +312,11 @@ namespace Winform.Forms
                     this.Hide();
                    
                 }
-                
+                hideLoader();
                 
             }catch(Exception exc)
             {
+                hideLoader();
                 MessageBox.Show(exc.Message, "Suppression match", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

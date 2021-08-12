@@ -43,9 +43,9 @@ namespace Winform.Forms
             this.Suivant = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.pages = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.loading = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loading)).BeginInit();
             this.SuspendLayout();
             // 
             // deco
@@ -199,15 +199,15 @@ namespace Winform.Forms
             this.pages.TabIndex = 13;
             this.pages.Text = "label1";
             // 
-            // pictureBox1
+            // loading
             // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.pictureBox1.Image = global::Winform.Properties.Resources._1496__1_;
-            this.pictureBox1.Location = new System.Drawing.Point(544, 119);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(61, 62);
-            this.pictureBox1.TabIndex = 14;
-            this.pictureBox1.TabStop = false;
+            this.loading.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.loading.Image = global::Winform.Properties.Resources._1496__1_;
+            this.loading.Location = new System.Drawing.Point(544, 119);
+            this.loading.Name = "loading";
+            this.loading.Size = new System.Drawing.Size(61, 62);
+            this.loading.TabIndex = 14;
+            this.loading.TabStop = false;
             // 
             // Accueil
             // 
@@ -215,7 +215,7 @@ namespace Winform.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(839, 840);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.loading);
             this.Controls.Add(this.pages);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Suivant);
@@ -232,8 +232,9 @@ namespace Winform.Forms
             this.Controls.Add(this.deco);
             this.Name = "Accueil";
             this.Text = "Accueil";
+            this.Load += new System.EventHandler(this.Accueil_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loading)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -255,6 +256,6 @@ namespace Winform.Forms
         internal System.Windows.Forms.TextBox searchBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label pages;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox loading;
     }
 }

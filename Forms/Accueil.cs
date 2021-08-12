@@ -39,6 +39,14 @@ namespace Winform.Forms
             new Login().Show();
             this.Hide();
         }
+        private void showProgress()
+        {
+            this.loading.Visible = true;
+        }
+        private void hideProgress()
+        {
+            this.loading.Visible = false;
+        }
 
         private void searchbutton_Click(object sender, EventArgs e)
         {
@@ -47,7 +55,9 @@ namespace Winform.Forms
 
         private void creationMatch_Click(object sender, EventArgs e)
         {
+            showProgress();
             new CreationMatch(null).Show();
+            hideProgress();
 
         }
         private void setDataGridView()
@@ -122,6 +132,11 @@ namespace Winform.Forms
             rechercher();
         }
 
+        private void Accueil_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == dataGridView1.Columns["voir"].Index)
@@ -191,12 +206,14 @@ namespace Winform.Forms
             dataGridView1.Refresh();
             this.dataGridView1.DataSource = this.liste;
             setDataGridView();
+            hideProgress();
+           // this.Refresh();
         }
         private void rechercher()
         {
             try
             {
-
+                showProgress();
                 this.liste = matchService.GetMatches(searchBox.Text, etatBox.Checked, isTodayBox.Checked,dateTimePicker1.Value,dateTimePicker2.Value,page,max);
                 populateData();
             }catch(Exception exc)
