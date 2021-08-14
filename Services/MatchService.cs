@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -136,31 +137,35 @@ namespace Winform.Services
             {
                id = idpari
             });
-            using (var client = new HttpClient())
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(endpoint);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
+        //    httpWebRequest.Timeout = 0;
+
+            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
-                var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-                var postTask = client.PostAsync(endpoint, httpContent);
+                
 
-                postTask.Wait();
+                streamWriter.Write(json);
+            }
 
-                var result = postTask.Result;
-                if (result.IsSuccessStatusCode)
-                {
-
-                }
-                else
-                {
-                    throw new Exception("Erreur distrubution des gains");
-                }
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
             }
         }
         public void distribuerGain(List<Pari> listPari,Match match)
         {
+            Console.WriteLine("Distribution des gains");
             foreach(Pari p in listPari)
             {
+                Console.WriteLine("distribution:" + p.Id);
                 distribution(p.Id);
             }
+            Console.WriteLine("Terminer match grails");
             terminerMatchGrails(match);
+            Console.WriteLine("Terminer match node");
             terminerMatchNode(match);
         }
         public List<Match> GetMatches(String search,bool etat,bool isToday,DateTime dateDebut,DateTime dateFin,int page,int limit)

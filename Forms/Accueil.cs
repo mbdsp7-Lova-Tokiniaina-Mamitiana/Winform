@@ -41,11 +41,17 @@ namespace Winform.Forms
         }
         private void showProgress()
         {
+            
+            
+          
             this.loading.Visible = true;
+
+
         }
         private void hideProgress()
         {
             this.loading.Visible = false;
+             
         }
 
         private void searchbutton_Click(object sender, EventArgs e)

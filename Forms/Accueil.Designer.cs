@@ -43,9 +43,8 @@ namespace Winform.Forms
             this.Suivant = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.pages = new System.Windows.Forms.Label();
-            this.loading = new System.Windows.Forms.PictureBox();
+            this.loading = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.loading)).BeginInit();
             this.SuspendLayout();
             // 
             // deco
@@ -67,7 +66,7 @@ namespace Winform.Forms
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(145, 213);
+            this.dataGridView1.Location = new System.Drawing.Point(145, 232);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(537, 530);
             this.dataGridView1.TabIndex = 1;
@@ -78,7 +77,7 @@ namespace Winform.Forms
             this.results.AllowDrop = true;
             this.results.AutoSize = true;
             this.results.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.results.Location = new System.Drawing.Point(362, 197);
+            this.results.Location = new System.Drawing.Point(362, 216);
             this.results.Name = "results";
             this.results.Size = new System.Drawing.Size(102, 13);
             this.results.TabIndex = 2;
@@ -158,7 +157,7 @@ namespace Winform.Forms
             this.previous.BackColor = System.Drawing.Color.DarkOrange;
             this.previous.FlatAppearance.BorderSize = 0;
             this.previous.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.previous.Location = new System.Drawing.Point(145, 749);
+            this.previous.Location = new System.Drawing.Point(145, 768);
             this.previous.Name = "previous";
             this.previous.Size = new System.Drawing.Size(75, 23);
             this.previous.TabIndex = 10;
@@ -171,7 +170,7 @@ namespace Winform.Forms
             this.Suivant.BackColor = System.Drawing.Color.DarkTurquoise;
             this.Suivant.FlatAppearance.BorderSize = 0;
             this.Suivant.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.Suivant.Location = new System.Drawing.Point(607, 749);
+            this.Suivant.Location = new System.Drawing.Point(607, 768);
             this.Suivant.Name = "Suivant";
             this.Suivant.Size = new System.Drawing.Size(75, 23);
             this.Suivant.TabIndex = 11;
@@ -193,7 +192,7 @@ namespace Winform.Forms
             // 
             this.pages.AutoSize = true;
             this.pages.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pages.Location = new System.Drawing.Point(400, 749);
+            this.pages.Location = new System.Drawing.Point(396, 773);
             this.pages.Name = "pages";
             this.pages.Size = new System.Drawing.Size(41, 13);
             this.pages.TabIndex = 13;
@@ -201,13 +200,15 @@ namespace Winform.Forms
             // 
             // loading
             // 
-            this.loading.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.loading.Image = global::Winform.Properties.Resources._1496__1_;
-            this.loading.Location = new System.Drawing.Point(544, 119);
+            this.loading.AutoSize = true;
+            this.loading.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loading.ForeColor = System.Drawing.Color.Red;
+            this.loading.Location = new System.Drawing.Point(273, 176);
             this.loading.Name = "loading";
-            this.loading.Size = new System.Drawing.Size(61, 62);
-            this.loading.TabIndex = 14;
-            this.loading.TabStop = false;
+            this.loading.Size = new System.Drawing.Size(231, 24);
+            this.loading.TabIndex = 15;
+            this.loading.Text = "Veuillez patienter un instant ....";
+            this.loading.UseCompatibleTextRendering = true;
             // 
             // Accueil
             // 
@@ -234,7 +235,6 @@ namespace Winform.Forms
             this.Text = "Accueil";
             this.Load += new System.EventHandler(this.Accueil_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.loading)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -256,6 +256,6 @@ namespace Winform.Forms
         internal System.Windows.Forms.TextBox searchBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label pages;
-        private System.Windows.Forms.PictureBox loading;
+        private System.Windows.Forms.Label loading;
     }
 }

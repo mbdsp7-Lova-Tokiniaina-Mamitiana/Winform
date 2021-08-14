@@ -45,15 +45,14 @@ namespace Winform.Forms
             this.latitude = new System.Windows.Forms.TextBox();
             this.terminer = new System.Windows.Forms.Button();
             this.supprimer = new System.Windows.Forms.Button();
-            this.loading = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.loading = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.loading)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -206,15 +205,6 @@ namespace Winform.Forms
             this.supprimer.UseVisualStyleBackColor = false;
             this.supprimer.Click += new System.EventHandler(this.supprimer_Click);
             // 
-            // loading
-            // 
-            this.loading.Image = global::Winform.Properties.Resources._1496__1_;
-            this.loading.Location = new System.Drawing.Point(339, 42);
-            this.loading.Name = "loading";
-            this.loading.Size = new System.Drawing.Size(64, 60);
-            this.loading.TabIndex = 19;
-            this.loading.TabStop = false;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -255,16 +245,27 @@ namespace Winform.Forms
             this.label6.TabIndex = 23;
             this.label6.Text = "latitude";
             // 
+            // loading
+            // 
+            this.loading.AutoSize = true;
+            this.loading.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loading.ForeColor = System.Drawing.Color.Red;
+            this.loading.Location = new System.Drawing.Point(255, 54);
+            this.loading.Name = "loading";
+            this.loading.Size = new System.Drawing.Size(225, 20);
+            this.loading.TabIndex = 24;
+            this.loading.Text = "Veuillez patienter un instant ....";
+            // 
             // CreationMatch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(791, 739);
+            this.Controls.Add(this.loading);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.loading);
             this.Controls.Add(this.supprimer);
             this.Controls.Add(this.terminer);
             this.Controls.Add(this.latitude);
@@ -286,7 +287,6 @@ namespace Winform.Forms
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.loading)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -310,10 +310,10 @@ namespace Winform.Forms
         private System.Windows.Forms.TextBox latitude;
         private System.Windows.Forms.Button terminer;
         private System.Windows.Forms.Button supprimer;
-        private System.Windows.Forms.PictureBox loading;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label loading;
     }
 }
