@@ -85,17 +85,17 @@ namespace Winform.Services
         
         public void saveToken()
         {
-            Properties.Settings.Default["token"] = token;
-            Properties.Settings.Default.Save();
+            BetSoccer.Properties.Settings.Default["token"] = token;
+            BetSoccer.Properties.Settings.Default.Save();
         }
         public String getStorageToken()
         {
             String s = null;
             try
             {
-                if (Properties.Settings.Default["token"] != null)
+                if (BetSoccer.Properties.Settings.Default["token"] != null)
                 {
-                    s = Properties.Settings.Default["token"].ToString();
+                    s = BetSoccer.Properties.Settings.Default["token"].ToString();
                 }
             }
             catch (Exception)

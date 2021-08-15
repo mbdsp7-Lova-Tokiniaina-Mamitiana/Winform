@@ -149,23 +149,26 @@ namespace Winform.Forms
             {
                 try
                 {
+                    showProgress();
                     int index = e.RowIndex;
                     Match m = liste[index];
                     CreationMatch c = new CreationMatch(m);
                     c.Show();
+                    hideProgress();
 
                 }
                 catch (Exception exc)
                 {
                     Console.WriteLine(exc.Message + ": /n" + exc.StackTrace);
                     //  MessageBox.Show(exc.Message);
-                   
+                    hideProgress();
                 }
             }
             if (e.ColumnIndex == dataGridView1.Columns["supprimer"].Index)
             {
                 try
                 {
+                    
                     int index = e.RowIndex;
                     Match m = liste[index];
                     DialogResult res = MessageBox.Show("Etes vous sur de vouloir supprimer le match "+m.Description+" ?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
@@ -181,7 +184,7 @@ namespace Winform.Forms
                 {
                     Console.WriteLine(exc.Message + ": /n" + exc.StackTrace);
                     //  MessageBox.Show(exc.Message);
-
+                    hideProgress();
                 }
             }
         }

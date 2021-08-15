@@ -29,6 +29,7 @@ namespace Winform.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Accueil));
             this.deco = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.results = new System.Windows.Forms.Label();
@@ -231,6 +232,7 @@ namespace Winform.Forms
             this.Controls.Add(this.results);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.deco);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Accueil";
             this.Text = "Accueil";
             this.Load += new System.EventHandler(this.Accueil_Load);
